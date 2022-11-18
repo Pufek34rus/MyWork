@@ -1,6 +1,8 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton
+from PyQt6.QtGui import QIcon
 import random
 import sys
+
 
 
 class MainWindow(QMainWindow):
@@ -22,6 +24,7 @@ class MainWindow(QMainWindow):
         self.button2 = QPushButton("Ножницы", self)
         self.button3 = QPushButton("Бумага", self)
 
+
     def ACTION(self):
         self.input.textChanged.connect(self.labelname.setText)
 
@@ -34,17 +37,18 @@ class MainWindow(QMainWindow):
         self.button3.clicked.connect(self.testo2002)
         self.labelname.hide()
         self.intername.setText("Введите имя")
+        self.button1.setIcon(QIcon("noj.jpg"))
 
     def GEO(self):
         self.setFixedSize(800, 600)
-        self.intername.setGeometry(300,210,200,20)
+        self.intername.setGeometry(300, 210, 200, 20)
         self.labelname.setGeometry(0, 0, 200, 20)
         self.input.setGeometry(300, 230, 200, 20)
         self.button.setGeometry(300, 250, 200, 50)
         self.button1.setGeometry(150, 250, 100, 100)
         self.button2.setGeometry(350, 250, 100, 100)
         self.button3.setGeometry(550, 250, 100, 100)
-        self.label.setGeometry(0, 0, 100, 200)
+        self.label.setGeometry(0, 0, 200, 100)
 
     def clickme(self):
         self.intername.hide()
@@ -106,8 +110,8 @@ class MainWindow(QMainWindow):
             ELabel = f"Игрок: Бумага \nКомпьютер: {var}\nПобеда компбютера"
             self.label.setText(ELabel)
 
-
 app = QApplication(sys.argv)
 window = MainWindow()
 window.show()
+RESOURCES = asd.qrc
 app.exec()
