@@ -1,104 +1,113 @@
+from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QVBoxLayout, QWidget, QPushButton
 import random
 import sys
 from PyQt6.QtCore import QSize, Qt
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel
 
 
-class Window(QMainWindow):
-
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Камень, Ножницы, Бумага!")
-        name = ""
-
-        self.setGeometry(100, 100, 600, 400)
-        self.UiComponents()
-        self.show()
-
-    def layout(self):
-        self.grid = QGreedLayout()
-        self.grid.setSpacing(10)
-        self.setLayout(grid)
-
-    def UiComponents(self):
+        self.setWindowTitle("My App")
+        self.label = QLabel()
+        self.input = QLineEdit()
+        self.input.textChanged.connect(self.label.setText)
+        self.button = QPushButton("Начать игру", self)
+        self.button.clicked.connect(self.clickme)
         self.button1 = QPushButton("Камень", self)
         self.button1.hide()
-        self.button1.setGeometry(0, 0, 600, 40)
-        self.button1.clicked.connect(self.test1)
+        self.button1.clicked.connect(self.testo2000)
         self.button2 = QPushButton("Ножницы", self)
         self.button2.hide()
-        self.button2.setGeometry(0, 40, 600, 40)
-        self.button2.clicked.connect(self.test2)
+        self.button2.clicked.connect(self.testo2001)
         self.button3 = QPushButton("Бумага", self)
         self.button3.hide()
-        self.button3.setGeometry(0, 80, 600, 40)
-        self.button3.clicked.connect(self.test3)
-        self.button = QPushButton("CLICK", self)
-        self.button.setGeometry(0, 0, 600, 40)
-        self.button.clicked.connect(self.clickme)
+        self.button3.clicked.connect(self.testo2002)
+
+        layout = QVBoxLayout()
+        # layout.addWidget(self.input)
+        layout.addWidget(self.label)
+        layout.addWidget(self.button)
+        layout.addWidget(self.button1)
+        layout.addWidget(self.button2)
+        layout.addWidget(self.button3)
+
+        container = QWidget()
+        container.setLayout(layout)
+        self.setGeometry(100, 100, 600, 400)
+        self.setCentralWidget(container)
 
     def test1(self):
         self.game(1)
+
     def test2(self):
         self.game(2)
+
     def test3(self):
         self.game(3)
+
     def clickme(self):
         self.button.hide()
         self.button1.show()
         self.button2.show()
         self.button3.show()
 
-    def game(self, choiсe):
-        print(choiсe, choiсe, choiсe, choiсe, choiсe, choiсe,)
+
+    def testo2000(self):
         var = ["Камень", "Ножницы", "Бумага"]
-        run = "Да"
-        self.choiсe = choiсe
-        while run == "Да":
-            while True:
+        comp = random.randint(0, len(var) - 1)
 
-                comp = random.randint(0, len(var) - 1)
+        if comp == 0:
+            var = var[comp]
+            ELabel = f"Игрок: Камень \nКомпьютер: {var}\nНичья"
+            self.label.setText(ELabel)
+        if comp == 2:
+            var = var[comp]
+            ELabel = f"Игрок: Камень \nКомпьютер: {var}\nПобеда компьютера"
+            self.label.setText(ELabel)
+        if comp == 1:
+            var = var[comp]
+            ELabel = f"Игрок: Камень \nКомпьютер: {var}\nПобеда игрока"
+            self.label.setText(ELabel)
 
-                if choiсe == 1 and comp == 0:
-                    print("Игрок: Камень", "\nКомпьютер: ", var[comp])
-                    print("Ничья")
-                elif choiсe == 2 and comp == 1:
-                    print("Игрок: Ножницы", "\nКомпьютер: ", var[comp])
-                    print("Ничья")
-                elif choiсe == 3 and comp == 2:
-                    print("Игрок: Бумага", "\nКомпьютер: ", var[comp])
-                    print("Ничья")
-                elif choiсe == 1 and comp == 2:
-                    print("Игрок: Камень", "\nКомпьютер: ", var[comp])
-                    print("Победа компьютера")
-                elif choiсe == 1 and comp == 1:
-                    print("Игрок: Камень", "\nКомпьютер: ", var[comp])
-                    print("Победа Игрока")
-                elif choiсe == 2 and comp == 0:
-                    print("Игрок: Ножницы", "\nКомпьютер: ", var[comp])
-                    print("Победа Компютера")
-                elif choiсe == 2 and comp == 2:
-                    print("Игрок: Ножницы", "\nКомпьютер: ", var[comp])
-                    print("Победа Игрока")
-                elif choiсe == 3 and comp == 0:
-                    print("Игрок: Бумага", "\nКомпьютер: ", var[comp])
-                    print("Победа Игрока")
-                elif choiсe == 3 and comp == 1:
-                    print("Игрок: Бумага ", "\nКомпьютер: ", var[comp])
-                    print("Победа Компьютера")
-                else:
-                    print("Неверное значение \nИгрок: ",
-                          choiсe, "\nКомпьютер: ", var[comp])
-                break
-            run = input("Начать заного? Да/Нет: ")
-            if run == "Нет":
-                print("Игра закрыта")
-                While = False
-            if run == "Да":
-                print("Начата новая игра: ")
+    def testo2001(self):
+        var = ["Камень", "Ножницы", "Бумага"]
+        comp = random.randint(0, len(var) - 1)
+
+        if comp == 0:
+            var = var[comp]
+            ELabel = f"Игрок: Ножницы \nКомпьютер: {var}\nПобеда компьютера"
+            self.label.setText(ELabel)
+        if comp == 2:
+            var = var[comp]
+            ELabel = f"Игрок: Ножницы \nКомпьютер: {var}\nПобеда игрока"
+            self.label.setText(ELabel)
+        if comp == 1:
+            var = var[comp]
+            ELabel = f"Игрок: Ножницы \nКомпьютер: {var}\nНичья"
+            self.label.setText(ELabel)
+    def testo2002(self):
+        var = ["Камень", "Ножницы", "Бумага"]
+        comp = random.randint(0, len(var) - 1)
+
+        if comp == 0:
+            var = var[comp]
+            ELabel = f"Игрок: Бумага \nКомпьютер: {var}\nПобеда игрока"
+            self.label.setText(ELabel)
+        if comp == 2:
+            var = var[comp]
+            ELabel = f"Игрок: Бумага \nКомпьютер: {var}\nНичья"
+            self.label.setText(ELabel)
+        if comp == 1:
+            var = var[comp]
+            ELabel = f"Игрок: Бумага \nКомпьютер: {var}\nПобеда компбютера"
+            self.label.setText(ELabel)
 
 
-App = QApplication(sys.argv)
 
-window = Window()
-sys.exit(App.exec())
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()
