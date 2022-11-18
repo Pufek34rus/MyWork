@@ -1,8 +1,8 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QPixmap
+from PyQt6.QtCore import QResource
 import random
 import sys
-
 
 
 class MainWindow(QMainWindow):
@@ -24,7 +24,6 @@ class MainWindow(QMainWindow):
         self.button2 = QPushButton("Ножницы", self)
         self.button3 = QPushButton("Бумага", self)
 
-
     def ACTION(self):
         self.input.textChanged.connect(self.labelname.setText)
 
@@ -37,7 +36,7 @@ class MainWindow(QMainWindow):
         self.button3.clicked.connect(self.testo2002)
         self.labelname.hide()
         self.intername.setText("Введите имя")
-        self.button1.setIcon(QIcon("noj.jpg"))
+        self.button1.set
 
     def GEO(self):
         self.setFixedSize(800, 600)
@@ -58,8 +57,9 @@ class MainWindow(QMainWindow):
         self.button1.show()
         self.button2.show()
         self.button3.show()
-
-    def testo2000(self):
+##############################################################################
+##############################################################################
+##############################################################################
         var = ["Камень", "Ножницы", "Бумага"]
         comp = random.randint(0, len(var) - 1)
 
@@ -109,9 +109,13 @@ class MainWindow(QMainWindow):
             var = var[comp]
             ELabel = f"Игрок: Бумага \nКомпьютер: {var}\nПобеда компбютера"
             self.label.setText(ELabel)
+##############################################################################
+##############################################################################
+##############################################################################
+
 
 app = QApplication(sys.argv)
 window = MainWindow()
 window.show()
-RESOURCES = asd.qrc
+
 app.exec()
