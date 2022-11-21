@@ -1,8 +1,8 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton
-from PyQt6.QtGui import QIcon, QPixmap
-from PyQt6.QtCore import QResource
+from PyQt6.QtGui import QIcon, QAction
 import random
 import sys
+from testo import As
 
 
 class MainWindow(QMainWindow):
@@ -12,6 +12,9 @@ class MainWindow(QMainWindow):
         self.UI()
         self.ACTION()
         self.GEO()
+        self.bar()
+
+
 
     def UI(self):
         self.setWindowTitle(self.title)
@@ -24,19 +27,35 @@ class MainWindow(QMainWindow):
         self.button2 = QPushButton("Ножницы", self)
         self.button3 = QPushButton("Бумага", self)
 
+    def bar(self):
+        self.statusBar()
+        menubar = self.menuBar()
+        MenuGame = menubar.addMenu('Играть')
+        MenuEx = menubar.addMenu('Выход')
+        exitAction = QAction('Выход', self)
+        exitAction.setShortcut('Ctrl+Q')
+        exitAction.setStatusTip('Вызод из игры')
+        exitAction.triggered.connect(sys.exit)
+        GameAction = QAction("Начать игру",self)
+        GameAction.setShortcut('Ctrl+N')
+        GameAction.setStatusTip("Начало новой игры")
+        GameAction.triggered.connect(As)
+        MenuGame.addAction(GameAction)
+        MenuEx.addAction(exitAction)
+
     def ACTION(self):
         self.input.textChanged.connect(self.labelname.setText)
 
-        self.button.clicked.connect(self.clickme)
+        self.button.clicked.connect(As)
         self.button1.hide()
-        self.button1.clicked.connect(self.testo2000)
+        self.button1.clicked.connect(As.testo2000)
         self.button2.hide()
-        self.button2.clicked.connect(self.testo2001)
+        self.button2.clicked.connect(As.testo2001)
         self.button3.hide()
-        self.button3.clicked.connect(self.testo2002)
+        self.button3.clicked.connect(As.testo2002)
         self.labelname.hide()
         self.intername.setText("Введите имя")
-        self.button1.set
+        self.button1.setIcon(QIcon("noj.jpg"))
 
     def GEO(self):
         self.setFixedSize(800, 600)
@@ -57,65 +76,11 @@ class MainWindow(QMainWindow):
         self.button1.show()
         self.button2.show()
         self.button3.show()
-##############################################################################
-##############################################################################
-##############################################################################
-        var = ["Камень", "Ножницы", "Бумага"]
-        comp = random.randint(0, len(var) - 1)
 
-        if comp == 0:
-            var = var[comp]
-            ELabel = f"Игрок: Камень \nКомпьютер: {var}\nНичья"
-            self.label.setText(ELabel)
-        if comp == 2:
-            var = var[comp]
-            ELabel = f"Игрок: Камень \nКомпьютер: {var}\nПобеда компьютера"
-            self.label.setText(ELabel)
-        if comp == 1:
-            var = var[comp]
-            ELabel = f"Игрок: Камень \nКомпьютер: {var}\nПобеда игрока"
-            self.label.setText(ELabel)
 
-    def testo2001(self):
-        var = ["Камень", "Ножницы", "Бумага"]
-        comp = random.randint(0, len(var) - 1)
-
-        if comp == 0:
-            var = var[comp]
-            ELabel = f"Игрок: Ножницы \nКомпьютер: {var}\nПобеда компьютера"
-            self.label.setText(ELabel)
-        if comp == 2:
-            var = var[comp]
-            ELabel = f"Игрок: Ножницы \nКомпьютер: {var}\nПобеда игрока"
-            self.label.setText(ELabel)
-        if comp == 1:
-            var = var[comp]
-            ELabel = f"Игрок: Ножницы \nКомпьютер: {var}\nНичья"
-            self.label.setText(ELabel)
-
-    def testo2002(self):
-        var = ["Камень", "Ножницы", "Бумага"]
-        comp = random.randint(0, len(var) - 1)
-
-        if comp == 0:
-            var = var[comp]
-            ELabel = f"Игрок: Бумага \nКомпьютер: {var}\nПобеда игрока"
-            self.label.setText(ELabel)
-        if comp == 2:
-            var = var[comp]
-            ELabel = f"Игрок: Бумага \nКомпьютер: {var}\nНичья"
-            self.label.setText(ELabel)
-        if comp == 1:
-            var = var[comp]
-            ELabel = f"Игрок: Бумага \nКомпьютер: {var}\nПобеда компбютера"
-            self.label.setText(ELabel)
-##############################################################################
-##############################################################################
-##############################################################################
 
 
 app = QApplication(sys.argv)
 window = MainWindow()
 window.show()
-
-app.exec()
+sys.exit(app.exec())
